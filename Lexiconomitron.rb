@@ -15,6 +15,8 @@ class Lexiconomitron
     end).compact
   end
 
+#private
+
   def eater (string)
     return nil unless string.is_a? String
     string.gsub(/[tT]/,'')
@@ -22,110 +24,24 @@ class Lexiconomitron
 end
 
 # Test 1
-
-text = Lexiconomitron.new.eater("astmmT  123")
-
-if text == "asmm  123"
-  p "OK test 1"
-else
-  p "FAIL test 1, instead received #{text}"
+def test_method(method, input, output, testnumber)
+  text = Lexiconomitron.new.method(method).call(input)
+  if text == output
+    p "OK test #{testnumber}"
+  else
+    p "FAIL test #{testnumber}, instead received #{text}"
+  end
 end
 
-# Test 2
-
-text = Lexiconomitron.new.eater("")
-
-if text == ""
-  p "OK test 2"
-else
-  p "FAIL test 2, instead received #{text}"
-end
-
-#Test 3
-
-text = Lexiconomitron.new.eater(3)
-
-if text == nil
-  p "OK test 3"
-else
-  p "FAIL test 3, instead received #{text}"
-end
-
-#Test 3.b
-text = Lexiconomitron.new.eater("asfdshhj")
-
-if text == "asfdshhj"
-  p "OK test 3.b"
-else
-  p "FAIL test 3.b, instead received #{text}"
-end
-
-#Test 4
-
-text = Lexiconomitron.new.shazam(["uno","dos","tres", "", 2343])
-
-if text == ["onu","sod","ser", "", ""]
-  p "OK test 4"
-else
-  p "FAIL test 4, instead received #{text}"
-end
-
-#Test 5
-
-text = Lexiconomitron.new.shazam([])
-
-if text == []
-  p "OK test 5"
-else
-  p "FAIL test 5, instead received #{text}"
-end
-
-#Test 6
-
-text = Lexiconomitron.new.shazam("rttjkshdf")
-
-if text == []
-  p "OK test 6"
-else
-  p "FAIL test 6, instead received #{text}"
-end
-
-#Test 7
-
-text = Lexiconomitron.new.oompa_loompa(["qwerty", "pe", "2344t", "lolt"])
-
-if text == [ "pe", "lol"]
-  p "OK test 7"
-else
-  p "FAIL test 7, instead received #{text}"
-end
-
-#Test 8
-
-text = Lexiconomitron.new.oompa_loompa(["", 45, "2344t", "lolt"])
-
-if text == [ "", "lol"]
-  p "OK test 8"
-else
-  p "FAIL test 8, instead received #{text}"
-end
-
-#Test 9
-
-text = Lexiconomitron.new.oompa_loompa([])
-
-if text == []
-  p "OK test 9"
-else
-  p "FAIL test 9, instead received #{text}"
-end
-
-#Test 10
-
-text = Lexiconomitron.new.oompa_loompa( "lolt")
-
-if text == []
-  p "OK test 10"
-else
-  p "FAIL test 10, instead received #{text}"
-end
+# Test 1
+test_method(:eater, "astmmT  123","asmm  123",1)
+test_method(:eater, "","",2)
+test_method(:eater, 3,nil,3)
+test_method(:eater, "asfdshhj","asfdshhj",4)
+test_method(:shazam,["uno","dos","tres", "", 2343],["onu","sod","ser", "", ""],5)
+test_method(:shazam,[],[],6)
+test_method(:oompa_loompa,["qwerty", "pe", "2344t", "lolt"],[ "pe", "lol"],7)
+test_method(:oompa_loompa,["", 45, "2344t", "lolt"],[ "", "lol"],8)
+test_method(:oompa_loompa,[],[],"mitest")
+test_method(:oompa_loompa,"lolt",[],10)
+  
