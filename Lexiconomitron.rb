@@ -15,7 +15,7 @@ class Lexiconomitron
     end).compact
   end
 
-#private
+private
 
   def eater (string)
     return nil unless string.is_a? String
